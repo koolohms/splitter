@@ -38,6 +38,8 @@ while True:
     for i in range(0,len(pdfs)):
         state = GPIO.input(GPIO_PIN)
 
+        time.sleep(0.5) # necessary delay to allow enough time for print to complete correctly
+
         fr = open(POS_PRINT_DEST+pdfs[i], 'rb')
 
         if state == 0:
