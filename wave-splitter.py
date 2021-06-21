@@ -33,7 +33,7 @@ while True:
         fr = open(POS_PRINT_DEST+pdfs[i], 'rb')
         fw = open(RECEIPT_DIR+pdfs[i], 'wb')
 
-        fw.write(fr.read()) # write pdf to NFC device
+        # fw.write(fr.read()) # write pdf to NFC device
 
         pdf = pdftotext.PDF(fr)
         text = "\n\n".join(pdf)
