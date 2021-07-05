@@ -43,9 +43,8 @@ while True:
         state = GPIO.input(GPIO_PIN)
 
         try:
-            pdf = pdftotext.PDF(fr)
-
             fr = open(POS_PRINT_DEST+pdfs[i], 'rb')
+            pdf = pdftotext.PDF(fr)
 
             if state == 0:
                 fw = open(RECEIPT_DIR+pdfs[i], 'wb')
