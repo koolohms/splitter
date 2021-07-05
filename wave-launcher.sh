@@ -2,7 +2,17 @@
 # wave-launcher.sh
 # launches waves splitter process
 
+LOGFILE=/home/pi/Documents/wave.log
+
+(
+    echo "$(date "+%m%d%Y %T") : Wave online"
+) >& $LOGFILE
+
 cd /
 cd /home/pi/Documents/splitter
 sudo python3 wave-splitter.py
 cd /
+
+(
+    echo "$(date "+%m%d%Y %T) : Wave process complete. Exiting.."
+) >& $LOGFILE
