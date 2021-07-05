@@ -43,6 +43,8 @@ while True:
         state = GPIO.input(GPIO_PIN)
 
         try:
+            pdf = pdftotext.PDF(fr)
+
             fr = open(POS_PRINT_DEST+pdfs[i], 'rb')
 
             if state == 0:
@@ -51,7 +53,6 @@ while True:
                 fw.close()
 
             elif state == 1:
-                pdf = pdftotext.PDF(fr)
                 text = "\n\n".join(pdf)
                 p.text(text)
                 p.cut()
