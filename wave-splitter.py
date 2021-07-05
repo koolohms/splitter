@@ -32,27 +32,23 @@ GPIO_PIN = 25   # We're using GPIO "BCM 25"
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN, GPIO.IN)
 
-while True:
-    pdfs = os.listdir(POS_PRINT_DEST)
+pdfs = os.listdir(POS_PRINT_DEST)
 
-    for i in range(0,len(pdfs)):
-        state = GPIO.input(GPIO_PIN)
+for i in range(0,len(pdfs)):
+    state = GPIO.input(GPIO_PIN)
 
-        time.sleep(0.5) # necessary delay to allow enough time for print to complete correctly
+    fr = open(POS_PRINT_DEST+pdfs[i], 'rb')
 
-        fr = open(POS_PRINT_DEST+pdfs[i], 'rb')
+    if state == 0:
+        fw = open(RECEIPT_DIR+pdfs[i], 'wb')
+        fw.write(fr.read()) # write pdf to NFC device
+        fw.close()
 
-        if state == 0:
-            fw = open(RECEIPT_DIR+pdfs[i], 'wb')
-            fw.write(fr.read()) # write pdf to NFC device
-            fw.close()
+    elif state == 1:
+        pdf = pdftotext.PDF(fr)
+        text = "\n\n".join(pdf)
+        p.text(text)
+        p.cut()
 
-        elif state == 1:
-            pdf = pdftotext.PDF(fr)
-            text = "\n\n".join(pdf)
-            p.text(text)
-            p.cut()
-
-        fr.close()
-        os.remove(POS_PRINT_DEST+pdfs[i])
-    time.sleep(1)
+    fr.close()
+    os.remove(POS_PRINT_DEST+pdfs[i])
