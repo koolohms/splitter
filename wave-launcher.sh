@@ -2,11 +2,11 @@
 # wave-launcher.sh
 # launches waves splitter process
 
-LOGFILE=/home/pi/Documents/wave.log
+LOGFILE=/etc/cups/postprocessing/wave.log
 
 (
     echo "$(date "+%m%d%Y %T") : Wave online"
-) >& $LOGFILE
+) > $LOGFILE
 
 cd /
 cd /home/pi/Documents/splitter
@@ -15,4 +15,4 @@ cd /
 
 (
     echo "$(date "+%m%d%Y %T) : Wave process complete. Exiting.."
-) >& $LOGFILE
+) > $LOGFILE
