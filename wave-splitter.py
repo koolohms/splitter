@@ -47,6 +47,7 @@ while True:
             pdf = pdftotext.PDF(fr)
 
             if state == 0:
+                fr.seek(0,0)    #let's go back to the beginning of the file
                 fw = open(RECEIPT_DIR+pdfs[i], 'wb')
                 fw.write(fr.read()) # write pdf to NFC device
                 fw.close()
@@ -59,6 +60,7 @@ while True:
             fr.close()
             i -= 1
             time.sleep(1)
+            print("[ERROR]: Exception raised!")
 
         else:
             fr.close()
