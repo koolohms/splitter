@@ -32,6 +32,10 @@ GPIO_PIN = 25   # We're using GPIO "BCM 25"
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN, GPIO.IN)
 
+# Wait for NFC device to be ready
+while not os.path.isdir(RECEIPT_DIR):
+    time.sleep(1)
+
 while True:
     pdfs = os.listdir(POS_PRINT_DEST)
 
