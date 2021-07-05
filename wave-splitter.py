@@ -64,6 +64,12 @@ while True:
 
         else:
             fr.close()
-            os.remove(POS_PRINT_DEST+pdfs[i])
+
+            try:
+                os.remove(POS_PRINT_DEST+pdfs[i])
+            except:
+                print("[ERROR] Could not remove file: ", POS_PRINT_DEST+pdfs[i])
+            else:
+                pass
 
     time.sleep(1)
