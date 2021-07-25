@@ -62,7 +62,7 @@ while True:
                 fr.seek(0,0)    #let's go back to the beginning of the file
                 while not receiptSent:
                     try:
-                        fw = open(RECEIPT_DIR+pdfs[i], 'wb')
+                        fw = open(RECEIPT_DIR+pdfs[i]+".txt", 'wb')
                     except:
                         print("NFC Error: unable to access NFC device.")
                         time.sleep(1)
