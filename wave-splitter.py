@@ -23,7 +23,16 @@ POS_PRINT_DEST = "/var/spool/cups-pdf/ANONYMOUS/"
 RECEIPT_DIR = "/media/pi/TESTUSB/"
 
 # Thermal printer init
-p = Usb(0x0416, 0x5011, 0, 0x04, 0x03)
+usbOK = False
+
+while not usbOK:
+    try:
+        p = Usb(0x0416, 0x5011, 0, 0x04, 0x03)
+    except:
+        print("USB Error: Check that the USB printer is connected and powered on.")
+    else:
+        usbOK = True
+
 
 # GPIO
 # 0 -> NFC device
