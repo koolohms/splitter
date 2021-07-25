@@ -24,13 +24,15 @@ RECEIPT_DIR = "/media/pi/TESTUSB/"
 
 # Thermal printer init
 usbOK = False
-
+p = None
 while not usbOK:
     try:
         p = Usb(0x0416, 0x5011, 0, 0x04, 0x03)
     except:
         print("USB Error: Check that the USB printer is connected and powered on.")
+        time.sleep(1)
     else:
+        print("USB Note: USB printer has been detected.")
         usbOK = True
 
 
