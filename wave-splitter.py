@@ -58,15 +58,33 @@ while True:
             pdf = pdftotext.PDF(fr)
 
             if state == 0:
+                receiptSent = False
                 fr.seek(0,0)    #let's go back to the beginning of the file
-                fw = open(RECEIPT_DIR+pdfs[i], 'wb')
+                while not receiptSent:
+                    try:
+                        fw = open(RECEIPT_DIR+pdfs[i], 'wb')
+                    except:
+                        print("NFC Error: unable to access NFC device.")
+                        time.sleep(1)
+                    else:
+                        print("NFC Info: receipt sent to NFC device.")
                 fw.write(fr.read()) # write pdf to NFC device
                 fw.close()
 
             elif state == 1:
+                receiptPrinted = False
                 text = "\n\n".join(pdf)
-                p.text(text)
-                p.cut()
+                while not receiptPrinted:
+                    try:
+                        p.text(text)
+                        p.cut()
+                    except:
+                        print("USB Error: there is an issue printing to the USB printer. Attempting to reconnect printer...")
+                        p = Usb(0x0416, 0x5011, 0, 0x04, 0x03)
+                        time.sleep(1)
+                    else:
+                        print("USB Info: receipt printed to USB printer.")
+                        receiptPrinted = True
         except:
             fr.close()
             i -= 1
