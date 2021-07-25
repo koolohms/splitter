@@ -68,6 +68,7 @@ while True:
                         time.sleep(1)
                     else:
                         print("NFC Info: receipt sent to NFC device.")
+                        receiptSent = True
                 fw.write(fr.read()) # write pdf to NFC device
                 fw.close()
 
