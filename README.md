@@ -1,2 +1,2 @@
 # splitter
-WAVE functionality for the splitter device
+WAVE functionality for the POS Switch Interface device
